@@ -12,7 +12,6 @@ export function NewNoteCard() {
   }
 
   function handleContentChanged(event: ChangeEvent<HTMLTextAreaElement>) {
-    console.log(event.target.value);
     setContent(event.target.value);
     if (event.target.value === '') {
       setShouldShowOnboarding(true);
@@ -21,7 +20,6 @@ export function NewNoteCard() {
 
   function handleSaveNote(event: FormEvent) {
     event.preventDefault();
-    console.log('conteudo', content);
     toast.success('Nota criada com sucesso!');
   }
 
