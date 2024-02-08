@@ -1,7 +1,26 @@
+import { useState } from 'react';
 import logo from './assets/logo-nlw.svg';
 import { NewNoteCard, NoteCard } from './components';
 
+interface NoteProps {
+  id: string;
+  date: Date;
+  content: string;
+}
+
 export function App() {
+  const [notes, setNotes] = useState<NoteProps[]>([]);
+
+  function onNoteCreated(content: string) {
+    const newNote = {
+      id: crypto.randomUUID(),
+      date: new Date(),
+      content,
+    };
+
+    setNotes([newNote, ...notes]);
+  }
+
   return (
     <div className="mx-auto max-w-6xl my-12 space-y-6">
       <img src={logo} alt="NLW Expert" />
@@ -17,9 +36,11 @@ export function App() {
       <div className="h-px bg-slate-700" />
 
       <div className="grid grid-cols-3 gap-6 auto-rows-[250px]">
-        <NewNoteCard />
+        <NewNoteCard onNoteCreated={onNoteCreated} />
 
-        <NoteCard note={{ date: new Date(), content: 'Teste' }} />
+        {notes.map(note => {
+          return <NoteCard key={note.id} note={note} />;
+        })}
       </div>
     </div>
   );
