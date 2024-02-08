@@ -38,6 +38,7 @@ export function App() {
   const filteredNotes =
     search !== ''
       ? notes.filter(note =>
+        // eslint-disable-next-line prettier/prettier
         note.content.toLocaleLowerCase().includes(search.toLocaleLowerCase()),
       )
       : notes;
